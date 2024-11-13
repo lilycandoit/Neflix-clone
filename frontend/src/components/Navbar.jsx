@@ -26,12 +26,14 @@ const Navbar = () => {
           <Link
             to="/"
             className="hover:underline"
+            onClick={() => setContentType('movie')}
           >
             Movies
           </Link>
           <Link
             to="/"
             className="hover:underline"
+            onClick={() => setContentType('TV')}
           >
             TV shows
           </Link>
