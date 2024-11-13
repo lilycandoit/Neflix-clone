@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useAuthStore } from '../store/authUser';
 
 const SignUpPage = () => {
-  const [email, setEmail] = useState('');
+  const { searchParams } = new URL(document.location);
+  const emailValue = searchParams.get('email');
+
+  const [email, setEmail] = useState(emailValue || '');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const { signup } = useAuthStore();
 
   const handleSignup = (e) => {
     e.preventDefault();
 
-    console.log(email, username, password);
-  }
+    signup({ email, username, password });
+  };
 
   return (
     <div className="h-screen w-full hero-bg">
@@ -29,7 +35,10 @@ const SignUpPage = () => {
           <h1 className="text-center text-white text-2xl font-bold mb-4">
             Sign Up
           </h1>
-          <form className="space-y-4" onSubmit={handleSignup}>
+          <form
+            className="space-y-4"
+            onSubmit={handleSignup}
+          >
             <div>
               <label
                 htmlFor="email"
@@ -75,7 +84,7 @@ const SignUpPage = () => {
                 placeholder="******"
                 id="password"
                 value={password}
-                onChange={e => setPassword(e.target.value)}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
 
