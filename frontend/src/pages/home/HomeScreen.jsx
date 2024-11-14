@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import { Info, Play } from 'lucide-react';
@@ -16,7 +16,7 @@ const HomeScreen = () => {
   const { contentType } = useContentStore();
   const [imgLoading, setImgLoading] = useState(true);
 
-  // add a Loading spinner just in case no trendingContent
+  // add a Loading spinner just in case no trendingContent after fetching
   if (!trendingContent)
     return (
       <div className="h-screen text-white relative">
