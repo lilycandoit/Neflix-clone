@@ -14,7 +14,7 @@ import MovieSlider from '../../components/MovieSlider';
 const HomeScreen = () => {
   const { trendingContent } = useGetTrendingContent();
   const { contentType } = useContentStore();
-
+  const [imgLoading, setImgLoading] = useState(true);
 
   // add a Loading spinner just in case no trendingContent
   if (!trendingContent)
@@ -30,10 +30,18 @@ const HomeScreen = () => {
       <div className="relative h-screen text-white">
         <Navbar />
 
+        {/* COOL OPTIMIZATION HACK FOR SLOWLY LOADING IMAGES */}
+        {imgLoading && (
+          <div className="absolute top-0 left-0 w-full h-full bg-black/70 flex items-center justify-center -z-10 shimmer"></div>
+        )}
+
         <img
           src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path}
           alt="Hero img"
           className="absolute top-0 left-0 w-full h-full object-cover -z-50"
+          onLoad={() => {
+            setImgLoading(false); // to stop shimmer effect
+          }}
         />
 
         <div
