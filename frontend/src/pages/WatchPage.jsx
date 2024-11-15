@@ -7,6 +7,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import ReactPlayer from 'react-player';
 import { ORIGINAL_IMG_BASE_URL, SMALL_IMG_BASE_URL } from '../utils/contants';
 import { formatReleaseDate } from '../utils/dateFunction';
+import WatchPageSkeleton from '../components/skeletons/WatchPageSkeleton';
 
 const WatchPage = () => {
   const { id } = useParams();
@@ -103,6 +104,30 @@ const WatchPage = () => {
     }
   };
 
+  // create shimmer effect when loading is NOT completed.
+  if (loading)
+    return (
+      <div className="min-h-screen bg-black p-10">
+        <WatchPageSkeleton />
+      </div>
+    );
+
+  // if no content shown, then display error
+  if (detailsContent.length === 0) {
+    return (
+      <div className="bg-black text-white h-screen">
+        <div className="max-w-6xl mx-auto">
+          <Navbar />
+          <div className="text-center mx-auto px-4 py-8 h-full mt-40">
+            <h2 className="text-2xl sm:text-5xl font-bold text-balance">
+              Content not found 😥
+            </h2>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-black min-h-screen text-white">
       <div className="mx-auto container px-4 py-8h h-full">
@@ -195,22 +220,25 @@ const WatchPage = () => {
               className="flex overflow-x-scroll gap-4 pb-4 group"
               ref={sliderRef}
             >
-              {similarContent.map((item) => (
-                <Link
-                  key={item.id}
-                  to={`/watch/${item.id}`}
-                  className="w-52 flex-none"
-                >
-                  <img
-                    src={SMALL_IMG_BASE_URL + item.poster_path}
-                    alt="Poster Path"
-                    className="w-full h-auto rounded-md"
-                  />
-                  <h4 className="mt-2 text-lg font-semibold">
-                    {item.title || item.name}
-                  </h4>
-                </Link>
-              ))}
+              {similarContent.map((item) => {
+                if (item.poster_path === null) return null;
+                return (
+                  <Link
+                    key={item.id}
+                    to={`/watch/${item.id}`}
+                    className="w-52 flex-none"
+                  >
+                    <img
+                      src={SMALL_IMG_BASE_URL + item.poster_path}
+                      alt="Poster Path"
+                      className="w-full h-auto rounded-md"
+                    />
+                    <h4 className="mt-2 text-lg font-semibold">
+                      {item.title || item.name}
+                    </h4>
+                  </Link>
+                );
+              })}
 
               <ChevronRight
                 className="absolute top-1/2 -translate-y-1/2 right-2 w-8 h-8
