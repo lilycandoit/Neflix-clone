@@ -14,7 +14,7 @@ const Navbar = () => {
   const { setContentType } = useContentStore();
 
   return (
-    <header className="nex-w-6xl mx-auto flex flex-wrap items-center justify-between p-4 max-h-20">
+    <header className="max-w-6xl mx-auto flex flex-wrap items-center justify-between p-4 max-h-20">
       <div className="flex items-center gap-10 z-50">
         <Link to="/">
           <img
