@@ -5,12 +5,12 @@ import SignUpPage from './pages/SignUpPage';
 import WatchPage from './pages/WatchPage';
 import SearchPage from './pages/SearchPage';
 import SearchHistoryPage from './pages/SearchHistoryPage';
-import Footer from './components/footer';
 import { Toaster } from 'react-hot-toast';
 import { useAuthStore } from './store/authUser';
 import { useEffect } from 'react';
 import { Loader } from 'lucide-react';
-import NotFoundPage from './pages/404'
+import NotFoundPage from './pages/404';
+import Footer from './components/Footer';
 
 function App() {
   const { user, isCheckingAuth, authCheck } = useAuthStore();
@@ -59,7 +59,7 @@ function App() {
         />
         <Route
           path="/*"
-          element= { <NotFoundPage />}
+          element={<NotFoundPage />}
         />
       </Routes>
       <Footer />
