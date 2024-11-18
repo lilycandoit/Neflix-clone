@@ -2,7 +2,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { create } from 'zustand';
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const useAuthStore = create((set) => ({
   user: null,
@@ -24,7 +24,7 @@ export const useAuthStore = create((set) => ({
       });
       toast.success('Account created successfully!');
     } catch (error) {
-      toast.error(error.response.data.message || 'Sign up failed');
+      toast.error(error.response?.data?.message || 'Sign up failed');
       set({ isSigningUp: false, user: null });
     }
   },
@@ -40,7 +40,7 @@ export const useAuthStore = create((set) => ({
         isLoggingIn: false,
       });
     } catch (error) {
-      toast.error(error.response.data.message || 'Login failed');
+      toast.error(error.response?.data?.message || 'Login failed');
       set({ isLoggingIn: false, user: null });
     }
   },
@@ -54,7 +54,7 @@ export const useAuthStore = create((set) => ({
       toast.success('Logged out successfully');
     } catch (error) {
       set({ isLoggingOut: false });
-      toast.error(error.response.data.message || 'Logout failed');
+      toast.error(error.response?.data?.message || 'Logout failed');
     }
   },
 
