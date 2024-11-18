@@ -36,3 +36,7 @@ app.listen(PORT, () => {
   console.log('server started at http://localhost:' + PORT);
   connectBD();
 });
+
+console.log('Mongoose:', require('mongoose').version);
+console.log('MongoDB:', require('mongodb').version);
+
