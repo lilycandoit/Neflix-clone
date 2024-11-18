@@ -1,6 +1,7 @@
 import express from 'express'; // module - aka 'esm'
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import cors from 'cors';
 
 import authRoutes from './routes/auth.route.js';
 import movieRoutes from './routes/movie.route.js';
@@ -15,6 +16,15 @@ const app = express();
 
 const PORT = ENV_VARS.PORT;
 const __dirname = path.resolve();
+
+// CORS configuration
+app.use(
+  cors({
+    origin: "https://mern-neflix-clone.onrender.com", // Your frontend URL
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true, // Include this if using cookies
+  })
+);
 
 app.use(express.json()); // will allow us to parse req.body object => imp
 app.use(cookieParser());
