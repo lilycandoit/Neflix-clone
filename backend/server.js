@@ -18,13 +18,15 @@ const PORT = ENV_VARS.PORT;
 const __dirname = path.resolve();
 
 // CORS configuration
-app.use(
-  cors({
-    origin: "https://mern-neflix-clone.onrender.com", // Your frontend URL
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true, // Include this if using cookies
-  })
-);
+app.use(cors());
+
+// app.use(
+//   cors({
+//     origin: "https://mern-neflix-clone.onrender.com",
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true, // Include this if using cookies
+//   })
+// );
 
 app.use(express.json()); // will allow us to parse req.body object => imp
 app.use(cookieParser());
