@@ -12,10 +12,12 @@ import { connectBD } from './config/db.js';
 import { protectRoute } from './middleware/protectRoute.js';
 
 import mongoose from 'mongoose';
-import mongodb from 'mongodb';
+import pkg from 'mongodb';
+
+const { version: mongodbVersion } = pkg;
 
 console.log('Mongoose version:', mongoose.version);
-console.log('MongoDB driver version:', mongodb.version);
+console.log('MongoDB driver version:', mongodbVersion);
 
 const app = express();
 
@@ -30,17 +32,15 @@ app.use('/api/v1/movie', protectRoute, movieRoutes);
 app.use('/api/v1/tv', protectRoute, tvRoutes);
 app.use('/api/v1/search', protectRoute, searchRoutes);
 
-if (ENV_VARS.NODE_ENV === "production") {
-	app.use(express.static(path.join(__dirname, "/frontend/dist")));
+if (ENV_VARS.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/dist')));
 
-	app.get("*", (req, res) => {
-		res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
-	});
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'frontend', 'dist', 'index.html'));
+  });
 }
 
 app.listen(PORT, () => {
   console.log('server started at http://localhost:' + PORT);
   connectBD();
 });
-
-
