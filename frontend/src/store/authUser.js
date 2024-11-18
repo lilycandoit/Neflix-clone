@@ -2,6 +2,8 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { create } from 'zustand';
 
+axios.defaults.withCredentials = true;
+
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
 
 export const useAuthStore = create((set) => ({
@@ -23,6 +25,8 @@ export const useAuthStore = create((set) => ({
         isSigningUp: false,
       });
       toast.success('Account created successfully!');
+      console.log('Response headers:', response.headers);
+
     } catch (error) {
       toast.error(error.response?.data?.message || 'Sign up failed');
       set({ isSigningUp: false, user: null });

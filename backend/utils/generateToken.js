@@ -11,5 +11,7 @@ export const generateTokenAndSetCookie = (userId, res) => {
         secure: ENV_VARS.NODE_ENV !== 'development', //ensures that the cookie is only sent over HTTPS (secure HTTP connections).
     })
 
+    console.log('Generated token:', token);
+
     return token;
 }
