@@ -11,14 +11,6 @@ import { ENV_VARS } from './config/envVars.js';
 import { connectBD } from './config/db.js';
 import { protectRoute } from './middleware/protectRoute.js';
 
-import mongoose from 'mongoose';
-import pkg from 'mongodb';
-
-const { version: mongodbVersion } = pkg;
-
-console.log('Mongoose version:', mongoose.version);
-console.log('MongoDB driver version:', mongodbVersion);
-
 const app = express();
 
 const PORT = ENV_VARS.PORT;
