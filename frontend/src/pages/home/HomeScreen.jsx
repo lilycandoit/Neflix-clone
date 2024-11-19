@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import { Info, Play } from 'lucide-react';
-import useGetTrendingContent from '../../hooks/useGetTrendingContent';
+import useGetContent from '../../hooks/useGetContent';
 import {
   MOVIE_CATEGORIES,
   ORIGINAL_IMG_BASE_URL,
@@ -12,12 +12,12 @@ import { useContentStore } from '../../store/content';
 import MovieSlider from '../../components/MovieSlider';
 
 const HomeScreen = () => {
-  const { trendingContent } = useGetTrendingContent();
+  const { Content } = useGetContent();
   const { contentType } = useContentStore();
   const [imgLoading, setImgLoading] = useState(true);
 
-  // add a Loading spinner just in case no trendingContent after fetching
-  if (!trendingContent)
+  // add a Loading spinner just in case no Content after fetching
+  if (!Content)
     return (
       <div className="h-screen text-white relative">
         <Navbar />
@@ -36,7 +36,7 @@ const HomeScreen = () => {
         )}
 
         <img
-          src={ORIGINAL_IMG_BASE_URL + trendingContent?.backdrop_path}
+          src={ORIGINAL_IMG_BASE_URL + Content?.backdrop_path}
           alt="Hero img"
           className="absolute top-0 left-0 w-full h-full object-cover -z-50"
           onLoad={() => {
@@ -54,30 +54,30 @@ const HomeScreen = () => {
 
           <div className="max-w-2xl">
             <h1 className="mt-4 text-6xl font-extrabold text-balance">
-              {trendingContent?.title || trendingContent?.name}
+              {Content?.title || Content?.name}
             </h1>
             <p className="mt-2 text-lg">
-              {trendingContent?.release_date?.split('-')[0] ||
-                trendingContent?.first_air_date.split('-')[0]}{' '}
-              | {trendingContent?.adult ? '18+' : 'PG-13'}
+              {Content?.release_date?.split('-')[0] ||
+                Content?.first_air_date.split('-')[0]}{' '}
+              | {Content?.adult ? '18+' : 'PG-13'}
             </p>
             <p className="mt-4 text-lg">
-              {trendingContent?.overview.length > 200
-                ? trendingContent?.overview.slice(0, 200) + '...'
-                : trendingContent?.overview}
+              {Content?.overview.length > 200
+                ? Content?.overview.slice(0, 200) + '...'
+                : Content?.overview}
             </p>
           </div>
 
           <div className="flex mt-8">
             <Link
-              to={`/watch/${trendingContent?.id}`}
+              to={`/watch/${Content?.id}`}
               className="bg-white hover:bg-white/60 text-black font-bold py-2 px-4 rounded mr-4 flex items-center justify-center"
             >
               <Play className="size-6 mr-2 fill-black" /> Play
             </Link>
 
             <Link
-              to={`/watch/${trendingContent?.id}`}
+              to={`/watch/${Content?.id}`}
               className="bg-gray-500/70 hover:bg-gray-500 text-white py-2 px-4 rounded mr-4 flex items-center justify-center"
             >
               <Info className="size-6 mr-2" /> More Info

@@ -13,3 +13,4 @@ export const ENV_VARS = {
 };
 
 // envVars.js: Configures dotenv, accesses process.env, and exports specific variables for use in other parts of the application.
+console.log("Loaded TMDB_API_KEY:", ENV_VARS.TMDB_API_KEY);
