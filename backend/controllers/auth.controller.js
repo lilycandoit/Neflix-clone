@@ -81,6 +81,9 @@ export async function signup(req, res) {
 
 // SET UP LOGIN ENDPOINT
 export async function login(req, res) {
+  console.log('Login controller triggered');
+  console.log('Request body:', req.body);
+  
   try {
     const { email, password } = req.body;
 
