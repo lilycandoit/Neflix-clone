@@ -16,8 +16,6 @@ const HomeScreen = () => {
   const { contentType } = useContentStore();
   const [imgLoading, setImgLoading] = useState(true);
 
-  console.log('HomeScreen re-rendered with Content:', Content);
-
   // add a Loading spinner just in case no Content after fetching
   if (!Content)
     return (
