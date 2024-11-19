@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Navbar from '../../components/Navbar';
 import { Link } from 'react-router-dom';
 import { Info, Play } from 'lucide-react';
-import useGetContent from '../../hooks/useGetContent';
+import useGetTrendingContent from '../../hooks/useGetTrendingContent';
 import {
   MOVIE_CATEGORIES,
   ORIGINAL_IMG_BASE_URL,
@@ -12,7 +12,7 @@ import { useContentStore } from '../../store/content';
 import MovieSlider from '../../components/MovieSlider';
 
 const HomeScreen = () => {
-  const { Content } = useGetContent();
+  const { Content } = useGetTrendingContent();
   const { contentType } = useContentStore();
   const [imgLoading, setImgLoading] = useState(true);
 
