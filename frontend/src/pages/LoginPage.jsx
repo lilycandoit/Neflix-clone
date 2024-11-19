@@ -12,7 +12,7 @@ const LoginPage = () => {
     e.preventDefault();
     login({ email, password });
   };
-  
+
   return (
     <div className="h-screen w-full hero-bg">
       <header className="max-w-6xl mx-auto flex items-center justify-between p-4">
@@ -77,7 +77,7 @@ const LoginPage = () => {
           <div className="text-center text-gray-400">
             Don't you a member?{' '}
             <Link
-              to={'/login'}
+              to={'/signup'}
               className="text-red-500 hover:underline"
             >
               Sign Up
