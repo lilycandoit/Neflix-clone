@@ -40,6 +40,7 @@ app.use(
 );
 
 app.use((req, res, next) => {
+  if (req.path === '/ping') return res.status(200).send('pong');
   console.log(`Request received: ${req.method} ${req.url}`);
   console.log(`Origin: ${req.headers.origin}`);
   next();
